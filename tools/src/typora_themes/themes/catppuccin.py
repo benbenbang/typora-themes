@@ -8,13 +8,12 @@ single mapping covers all four with no light/dark special-casing.
 from typing import cast
 
 # typora themes tools
-from typora_themes.colors import pick_mark, rgba
+from typora_themes.colors import inline_code, pick_mark, rgba
 
 NAME = "Catppuccin"
 PALETTE_URL = "https://catppuccin.com/palette"
 PALETTE_FILE = "catppuccin.json"
 OUT_DIR = "catppuccin"
-ASSET_DIR = "catppuccin"  # font folder name inside Typora's themes dir
 ACCENT = "mauve"
 FLAVORS = ("latte", "frappe", "macchiato", "mocha")
 
@@ -51,6 +50,11 @@ def variables(v):
         c["yellow"], c["base"], [c["crust"], c["base"], c["text"]]
     )
 
+    # Inline `code`: peach glyphs on dark, peach-tinted chip on Latte.
+    ic_fg, ic_bg, ic_border = inline_code(
+        c["peach"], c["mantle"], c["surface0"], c["text"], v["dark"]
+    )
+
     out = {f"--ctp-{name}": hex_ for name, hex_ in c.items()}
     out.update(
         {
@@ -66,6 +70,9 @@ def variables(v):
             # Code sits on mantle: overlay comments hit 1.7:1 on surface0 in
             # Latte. Definition comes from the border, not the fill.
             "--code-bg-color": c["mantle"],
+            "--inline-code-color": ic_fg,
+            "--inline-code-bg-color": ic_bg,
+            "--inline-code-border-color": ic_border,
             "--code-border-color": c["surface0"],
             # text
             "--text-color1": c["text"],

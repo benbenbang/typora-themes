@@ -6,6 +6,8 @@
  */
 
 :root {
+    --font-text: "Fira Code", "FiraCode Nerd Font", "FuraCode Nerd Font", ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    --font-mono: "Fira Code", "FiraCode Nerd Font", "FuraCode Nerd Font", ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
     --rp-base: #faf4ed;
     --rp-surface: #fffaf3;
     --rp-overlay: #f2e9e1;
@@ -22,13 +24,15 @@
     --rp-highlightMed: #dfdad9;
     --rp-highlightHigh: #cecacd;
     --accent-color: #907aa9;
-    --font-mono: "Fira Code", "FiraCode Nerd Font", "FuraCode Nerd Font", ui-monospace, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
     --bg-color1: #faf4ed;
     --bg-color2: #fffaf3;
     --bg-color3: #f2e9e1;
     --bg-color4: #f2e9e1;
     --bg-color5: #f2e9e1;
     --code-bg-color: #fffaf3;
+    --inline-code-color: #575279;
+    --inline-code-bg-color: #fbe9d1;
+    --inline-code-border-color: #f7d5a7;
     --code-border-color: #dfdad9;
     --text-color1: #575279;
     --text-color2: #797593;
@@ -110,7 +114,7 @@
 
 /* font
  * Fonts are not committed to this repo; copy firacode-fonts/*.woff into
- * <themes>/rose-pine/fonts/ (see README). A locally installed Fira Code is
+ * <themes>/theme-fonts/ (see README). A locally installed Fira Code is
  * preferred via local() and makes the copy unnecessary.
  * Fira Code ships no italic cut, so italic styles below are synthesized.
  */
@@ -120,7 +124,7 @@
     font-weight: 300;
     src:
         local("Fira Code Light"),
-        url("./rose-pine/fonts/FiraCode-Light.woff") format("woff");
+        url("./theme-fonts/FiraCode-Light.woff") format("woff");
 }
 
 @font-face {
@@ -129,7 +133,7 @@
     font-weight: 400;
     src:
         local("Fira Code Regular"),
-        url("./rose-pine/fonts/FiraCode-Regular.woff") format("woff");
+        url("./theme-fonts/FiraCode-Regular.woff") format("woff");
 }
 
 @font-face {
@@ -138,7 +142,7 @@
     font-weight: 500;
     src:
         local("Fira Code Medium"),
-        url("./rose-pine/fonts/FiraCode-Medium.woff") format("woff");
+        url("./theme-fonts/FiraCode-Medium.woff") format("woff");
 }
 
 @font-face {
@@ -147,7 +151,7 @@
     font-weight: 600;
     src:
         local("Fira Code SemiBold"),
-        url("./rose-pine/fonts/FiraCode-SemiBold.woff") format("woff");
+        url("./theme-fonts/FiraCode-SemiBold.woff") format("woff");
 }
 
 @font-face {
@@ -156,7 +160,7 @@
     font-weight: 700;
     src:
         local("Fira Code Bold"),
-        url("./rose-pine/fonts/FiraCode-Bold.woff") format("woff");
+        url("./theme-fonts/FiraCode-Bold.woff") format("woff");
 }
 
 /* basic style */
@@ -165,10 +169,28 @@ html {
 }
 
 body {
-    font-family: var(--font-mono);
+    font-family: var(--font-text);
     color: var(--text-color1);
     background: var(--bg-color1);
     line-height: 1.6;
+}
+
+/* Fonts are variables. To use different ones without editing this file, drop a
+ * base.user.css (all themes) or <theme>.user.css (one theme) into Typora's themes
+ * folder -- both load after the theme -- and override:
+ *
+ *   :root {
+ *       --font-text: "Inter", system-ui, sans-serif;
+ *       --font-mono: "JetBrains Mono", ui-monospace, monospace;
+ *   }
+ */
+:not(pre) > code,
+.md-fences,
+pre.md-meta-block,
+.CodeMirror,
+.CodeMirror pre,
+#typora-source .CodeMirror {
+    font-family: var(--font-mono);
 }
 
 /* text selection background color */
@@ -1094,11 +1116,18 @@ footer.ty-footer {
     bottom: -4px !important;
 }
 
-/* inline codeblock */
-code {
+/* inline codeblock
+ * Emphasised warm: coloured glyphs on the dark variants, a warm-tinted chip on
+ * the light ones (where warm text cannot reach 4.5:1). See tools colors.py.
+ *
+ * `:not(pre) > code` so the chip never lands on a fenced block: Typora's HTML
+ * export wraps fences as <pre><code>, which a bare `code` selector would hit.
+ */
+:not(pre) > code {
     font-size: 0.9em;
-    background-color: var(--code-bg-color);
-    border: 1px solid var(--code-border-color);
+    color: var(--inline-code-color);
+    background-color: var(--inline-code-bg-color);
+    border: 1px solid var(--inline-code-border-color);
     border-radius: 6px;
     padding: 3px 4px 3px 4px;
     margin: 0px 6px 0px 6px;

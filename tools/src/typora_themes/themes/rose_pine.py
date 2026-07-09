@@ -21,13 +21,12 @@ mapping still holds -- but nothing here may assume "surface is darker".
 from typing import cast
 
 # typora themes tools
-from typora_themes.colors import pick_mark, rgba
+from typora_themes.colors import inline_code, pick_mark, rgba
 
 NAME = "Rose Pine"
 PALETTE_URL = "https://rosepinetheme.com/palette"
 PALETTE_FILE = "rose-pine.json"
 OUT_DIR = "rosé-pine"  # repo folder (accented, matches the brand)
-ASSET_DIR = "rose-pine"  # font folder inside Typora's themes dir (ascii; matches the css filenames)
 ACCENT = "iris"
 # Explicit: pre-commit's pretty-format-json sorts keys, so dict order is not stable.
 VARIANTS = ("main", "moon", "dawn")
@@ -79,6 +78,11 @@ def variables(v):
     # italic, so they remain distinguishable from punctuation.
     comment = c["subtle"]
 
+    # Inline `code`: gold glyphs on dark, gold-tinted chip on Dawn.
+    ic_fg, ic_bg, ic_border = inline_code(
+        c["gold"], code_bg, c["highlightMed"], c["text"], dark
+    )
+
     out = {f"--rp-{name}": hex_ for name, hex_ in c.items()}
     out.update(
         {
@@ -92,6 +96,9 @@ def variables(v):
             "--bg-color4": c["overlay"],
             "--bg-color5": c["overlay"],
             "--code-bg-color": code_bg,
+            "--inline-code-color": ic_fg,
+            "--inline-code-bg-color": ic_bg,
+            "--inline-code-border-color": ic_border,
             "--code-border-color": c["highlightMed"],
             # text
             "--text-color1": c["text"],

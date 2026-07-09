@@ -14,6 +14,10 @@ from pathlib import Path
 
 PACKAGE = "typora_themes"
 
+# One shared font folder at the root of Typora's themes dir, rather than a copy
+# per theme. Named distinctly so it cannot collide with a theme's own asset dir.
+FONTS_DIR = "theme-fonts"
+
 
 def repo_root(start=None):
     """Nearest ancestor containing .git, searched from `start` then from here."""
@@ -63,7 +67,7 @@ def render(spec, template, root):
             "{PALETTE_URL}": spec.PALETTE_URL,
             # ACCENT may be a role path ("syn.fun"); specs can supply a nicer label.
             "{ACCENT_NAME}": getattr(spec, "ACCENT_LABEL", spec.ACCENT.capitalize()),
-            "{ASSET_DIR}": spec.ASSET_DIR,
+            "{FONTS_DIR}": FONTS_DIR,
         }
         css = template
         for token, value in substitutions.items():

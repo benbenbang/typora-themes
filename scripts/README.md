@@ -16,13 +16,17 @@ Re-run it after `uv run build-themes` to push changes to Typora, then restart Ty
 ### What it creates
 
 Typora only lists `.css` files at the **root** of its themes folder, and resolves
-`url()` relative to the `.css` file. Each theme's CSS asks for
-`./<asset>/fonts/*.woff`, so:
+`url()` relative to the `.css` file. Every theme's CSS asks for
+`./theme-fonts/*.woff`, so one shared folder serves them all:
 
 ```
-<themes>/rose-pine.css        real file
-<themes>/rose-pine/fonts/     real directory, real .woff files
+<themes>/rose-pine.css      real file
+<themes>/kanagawa-wave.css  real file
+<themes>/theme-fonts/       real directory, shared by every theme
 ```
+
+The fonts are copied once, not duplicated per theme, and only the five weights the
+`@font-face` rules actually name (`firacode-fonts/` also ships an unused variable font).
 
 Everything is **copied, not symlinked**, so the themes folder keeps working after this
 repo is moved or deleted. Nothing installed refers back to the repo.
@@ -31,9 +35,8 @@ Only the `.css` files and the fonts are copied — the repo's theme folder is ne
 installed wholesale, so its `README.md` and the other variants' CSS stay out of Typora's
 themes folder.
 
-The asset folder name is read out of each `.css` file's own `url()` declaration rather
-than hardcoded, which is why the accented `rosé-pine/` repo folder installs as
-`rose-pine/` — matching what the CSS actually asks for.
+The font folder name is read out of the generated CSS's own `url()` declaration rather
+than hardcoded, so the script and the themes cannot disagree about where fonts live.
 
 ### Behavior
 
@@ -62,6 +65,6 @@ TYPORA_EXTENSION_PATH=/tmp/themes ./scripts/sync.sh --dry-run
 
 ### Fonts
 
-Fira Code is copied into each theme's `fonts/` folder. The themes prefer a locally
+Fira Code is copied once into `<themes>/theme-fonts/`. The themes prefer a locally
 installed Fira Code via `local()` and fall back to the platform monospace face, so they
 still render correctly if those files are ever removed.
