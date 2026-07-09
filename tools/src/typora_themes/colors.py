@@ -64,3 +64,31 @@ def pick_mark(highlight, base, candidates, target=4.5):
         if contrast(fg, bg) >= target:
             return bg, fg, alpha, contrast(fg, bg)
     raise AssertionError(f"no accessible tint for {highlight} over {base}")
+
+
+def inline_code(warm, code_bg, code_border, text, dark, target=4.5, max_alpha=0.18):
+    """Emphasis for inline `code`, as (foreground, background, border).
+
+    On dark backgrounds a warm foreground (peach/gold/orange) is bright and
+    readable, so the glyphs carry the emphasis and the chip is untouched.
+
+    On light backgrounds the same hues top out around 2.2-2.5:1 against the code
+    surface -- far below AA -- and darkening them to pass turns peach into mud.
+    So the chip carries the emphasis instead: warm tinted background, ordinary
+    text. The tint is stepped down until the text clears `target`.
+    """
+    if dark:
+        assert contrast(warm, code_bg) >= target, (
+            f"warm inline-code fg {warm} on {code_bg} is only "
+            f"{contrast(warm, code_bg):.2f}:1"
+        )
+        return warm, code_bg, code_border
+
+    steps = max(int(round(max_alpha * 100)), 1)
+    for step in range(steps, 0, -1):
+        alpha = step / 100
+        chip = blend(warm, code_bg, alpha)
+        if contrast(text, chip) >= target:
+            border = blend(warm, code_bg, min(alpha + 0.22, 1.0))
+            return text, chip, border
+    raise AssertionError(f"no accessible warm chip for {warm} over {code_bg}")

@@ -12,8 +12,8 @@ accented with the signature blue (`syn.fun`).
 ## Install
 
 Typora resolves `url()` relative to the theme file, and only lists `.css` files at the
-root of the themes folder. So the CSS goes at the root and any fonts go in a
-`kanagawa/` folder beside it — the same layout the stock `gothic` theme uses.
+root of the themes folder. So the CSS goes at the root, and the fonts go in a shared
+`theme-fonts/` folder beside it.
 
 Open `Preferences → Appearance → Open Theme Folder`, then:
 
@@ -27,15 +27,17 @@ Restart Typora; the variants appear as three entries in the Themes menu.
 ### Fonts
 
 The themes ask for Fira Code and fall back to the platform monospace face. Nothing is
-bundled — no font is committed under `kanagawa/`.
+bundled — no font is committed alongside the CSS.
 
 If Fira Code (or a Nerd Font build) is **installed on your system**, it is picked up via
 `local()` and there is nothing else to do. Otherwise, to embed it for this theme:
 
 ```sh
-mkdir -p "$THEMES/kanagawa/fonts"
-cp firacode-fonts/*.woff "$THEMES/kanagawa/fonts/"
+mkdir -p "$THEMES/theme-fonts"
+cp firacode-fonts/FiraCode-{Regular,Bold,Light,Medium,SemiBold}.woff "$THEMES/theme-fonts/"
 ```
+
+That folder is shared by every theme in this repo, so it only needs doing once.
 
 Skip that step and Typora will simply log two missing `.woff` requests and render with
 the fallback face.
@@ -73,6 +75,9 @@ mapping that assumes "`_p` means lighter" will invert on one variant.
   clears 4.5:1 on any background, and on Lotus it fails even 3:1 (2.37:1 on the code
   surface). `ui.special` reaches 5.42 / 4.82 / 3.31:1 and is the only in-palette
   foreground that holds up across all three. Comments stay italic.
+- **Inline `code` is warm.** Wave and Dragon colour the glyphs `syn.constant`
+  (6.6-8.8:1). Lotus cannot: that orange reaches only 2.46:1 on the code surface, so the
+  chip is tinted instead and the text stays normal (4.52:1).
 - **`==highlight==` uses `diag.warning`, tinted per variant.** Lotus's orange is a
   mid-tone that no palette color clears 4.5:1 against at full strength, so it is blended
   toward `bg` (α=0.4) until it does. The dark variants keep it at full strength.

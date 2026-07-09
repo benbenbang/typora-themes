@@ -22,13 +22,12 @@ Two upstream quirks drive the mapping:
 """
 
 # typora themes tools
-from typora_themes.colors import pick_mark, rgba
+from typora_themes.colors import inline_code, pick_mark, rgba
 
 NAME = "Kanagawa"
 PALETTE_URL = "https://github.com/rebelot/kanagawa.nvim"
 PALETTE_FILE = "kanagawa.json"
 OUT_DIR = "kanagawa"
-ASSET_DIR = "kanagawa"
 ACCENT = "syn.fun"  # crystalBlue / dragonBlue2 / lotusBlue4; AA on all variants
 ACCENT_LABEL = "Blue (syn.fun)"
 # Explicit: pre-commit's pretty-format-json sorts keys, so dict order is unstable.
@@ -86,6 +85,11 @@ def variables(v):
     # Comments: see module docstring. ui.special beats syn.comment everywhere.
     comment = ui["special"]
 
+    # Inline `code`: orange glyphs on dark, orange-tinted chip on Lotus.
+    ic_fg, ic_bg, ic_border = inline_code(
+        syn["constant"], ui["bg_m2"], ui["bg_p1"], ui["fg"], v["dark"]
+    )
+
     out = {f"--kg-{name}": hex_ for name, hex_ in _flatten(c).items()}
     out.update(
         {
@@ -99,6 +103,9 @@ def variables(v):
             "--bg-color4": ui["float"]["bg"],
             "--bg-color5": ui["bg_p1"],
             "--code-bg-color": ui["bg_m2"],
+            "--inline-code-color": ic_fg,
+            "--inline-code-bg-color": ic_bg,
+            "--inline-code-border-color": ic_border,
             "--code-border-color": ui["bg_p1"],
             # text
             "--text-color1": ui["fg"],

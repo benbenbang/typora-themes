@@ -3,17 +3,17 @@
 # Install this repo's themes into Typora's themes folder.
 #
 # Typora only lists *.css at the root of its themes folder, and resolves url()
-# relative to the .css file. Each theme's CSS asks for ./<asset>/fonts/*.woff,
-# so the installed layout is:
+# relative to the .css file. Every theme's CSS asks for ./theme-fonts/*.woff,
+# so one shared folder serves them all and the installed layout is:
 #
-#   <themes>/catppuccin-mocha.css       real file
-#   <themes>/catppuccin/fonts/*.woff    real directory, real font files
+#   <themes>/catppuccin-mocha.css   real file
+#   <themes>/theme-fonts/*.woff     real directory, shared by every theme
 #
 # Everything is copied, never symlinked: the themes folder keeps working after
 # this repo is moved or deleted. Re-run after `uv run build-themes` to update.
 #
-# The asset folder name is read out of each .css file's own url(), so it stays
-# correct even where it differs from the repo folder (rosé-pine -> rose-pine).
+# The font folder name is read out of the generated CSS's own url(), so the
+# script and the themes can never disagree about where the fonts live.
 
 set -euo pipefail
 
@@ -24,6 +24,9 @@ FONTS_SRC="$REPO_ROOT/firacode-fonts"
 # user wrote by hand, so --uninstall consults this instead of guessing, and
 # install refuses to clobber anything not listed here.
 MANIFEST=".typora-themes-manifest"
+
+# Shared font folder name, read from the generated CSS at run time.
+FONTS_DIR=""
 
 DRY_RUN=0
 FORCE=0
@@ -78,17 +81,32 @@ Notes:
   Anything this script did not install is left alone unless --force. What it did
   install is recorded in <themes>/.typora-themes-manifest.
 
-  Fira Code is copied into each theme's fonts/ folder. The themes prefer a
-  locally installed Fira Code and fall back to the platform monospace face, so
-  they still render if those files are removed.
+  Fira Code is copied once into a shared <themes>/theme-fonts/ folder, not into
+  each theme. The themes prefer a locally installed Fira Code and fall back to
+  the platform monospace face, so they still render if those files are removed.
 EOF
 }
 
 function log() { printf '  %s\n' "$*"; }
 
-# The asset folder a theme's CSS expects, e.g. `rose-pine`. Read from its url().
-function asset_dir_for() {
-    sed -n 's|.*url("\./\([^/]*\)/fonts/.*|\1|p' "$1" | head -1
+# The font folder a theme's CSS expects, e.g. `theme-fonts`. Read from its url()
+# so the script and the generated CSS can never disagree about the name.
+#
+# No `| head -1`: under `set -o pipefail` the reader exiting early sends SIGPIPE
+# to sed, and the 141 takes the whole script down.
+function fonts_dir_for() {
+    local all
+    all="$(sed -n 's|.*url("\./\([^/]*\)/FiraCode-.*|\1|p' "$1")"
+    printf '%s\n' "${all%%$'\n'*}"
+}
+
+# The woff files the themes actually reference, e.g. FiraCode-Regular.woff.
+# firacode-fonts/ also ships FiraCode-VF.woff, which no @font-face names.
+function referenced_fonts() {
+    local css
+    while IFS= read -r css; do
+        sed -n 's|.*url("\./[^/]*/\([^"]*\.woff\)".*|\1|p' "$css"
+    done < <(theme_css_files) | sort -u
 }
 
 # Theme dirs = repo subdirs holding at least one generated Typora theme.
@@ -155,33 +173,70 @@ function install_css() {
     log "copied      $name"
 }
 
+# One shared folder for every theme, so the fonts are copied once rather than
+# duplicated per theme.
 function install_fonts() {
-    local themes_dir="$1" asset="$2" dst="$themes_dir/$2" n
+    local themes_dir="$1" fonts_dir="$2" dst="$themes_dir/$2" woff missing=0 n=0
 
-    may_write "$themes_dir" "$asset" || return 0
+    may_write "$themes_dir" "$fonts_dir" || return 0
 
-    n="$(find "$FONTS_SRC" -name '*.woff' | wc -l | tr -d ' ')"
-    if [ "$n" -eq 0 ]; then
-        log "warn        $FONTS_SRC has no .woff files; $asset/fonts left empty"
-    fi
+    for woff in $(referenced_fonts); do
+        if [ -f "$FONTS_SRC/$woff" ]; then
+            n=$((n + 1))
+        else
+            log "warn        $woff referenced by a theme but missing from $FONTS_SRC"
+            missing=$((missing + 1))
+        fi
+    done
 
     if [ "$DRY_RUN" -eq 1 ]; then
-        log "would copy  $asset/fonts/ ($n woff)"
+        log "would copy  $fonts_dir/ ($n woff)"
         return 0
     fi
 
-    # An old install may have left a symlink here; replace it with a real dir.
+    # An old install may have left a symlink, or a per-theme <asset>/fonts/ tree.
     [ -L "$dst" ] && rm -f "$dst"
 
-    mkdir -p "$dst/fonts"
-    if [ "$n" -gt 0 ]; then
-        cp "$FONTS_SRC"/*.woff "$dst/fonts/"
-    fi
-    log "copied      $asset/fonts/ ($n woff)"
+    mkdir -p "$dst"
+    for woff in $(referenced_fonts); do
+        [ -f "$FONTS_SRC/$woff" ] && cp "$FONTS_SRC/$woff" "$dst/$woff"
+    done
+    log "copied      $fonts_dir/ ($n woff)"
+}
+
+# Remove the <asset>/fonts/ folders an older version of this script created.
+function prune_legacy_assets() {
+    local themes_dir="$1" entry
+    while IFS= read -r entry; do
+        [ -n "$entry" ] || continue
+        local dst="$themes_dir/$entry"
+        [ -d "$dst" ] || [ -L "$dst" ] || continue
+        if [ "$DRY_RUN" -eq 1 ]; then
+            log "would drop  $entry/ (old per-theme font folder)"
+        else
+            rm -rf "$dst"
+            log "dropped     $entry/ (old per-theme font folder)"
+        fi
+    done < <(legacy_asset_dirs "$themes_dir")
+}
+
+# Manifest entries from an older layout: a directory that is not the shared
+# fonts dir. Those were the per-theme <asset>/ folders holding fonts/.
+function legacy_asset_dirs() {
+    local themes_dir="$1" entry
+    [ -f "$themes_dir/$MANIFEST" ] || return 0
+    while IFS= read -r entry; do
+        [ -n "$entry" ] || continue
+        case "$entry" in
+            *.css) continue ;;
+            "$FONTS_DIR") continue ;;
+        esac
+        printf '%s\n' "$entry"
+    done < "$themes_dir/$MANIFEST"
 }
 
 function do_install() {
-    local themes_dir="$1" css asset name seen_assets="" entries=""
+    local themes_dir="$1" css name first_css entries=""
     mkdir -p "$themes_dir"
 
     if [ ! -d "$FONTS_SRC" ]; then
@@ -189,20 +244,33 @@ function do_install() {
         return 1
     fi
 
-    # Process substitution, not a pipe: a pipe would run the loop in a subshell
-    # and lose `seen_assets`, re-copying each asset dir once per variant.
+    # Read the first line without a pipe; `| head -1` would SIGPIPE the producer
+    # and, with pipefail, abort the script.
+    first_css=""
+    while IFS= read -r css; do first_css="$css"; break; done < <(theme_css_files)
+    if [ -z "$first_css" ]; then
+        echo "no generated themes found under $REPO_ROOT" >&2
+        return 1
+    fi
+    FONTS_DIR="$(fonts_dir_for "$first_css")"
+    if [ -z "$FONTS_DIR" ]; then
+        echo "could not determine the font folder from $first_css" >&2
+        return 1
+    fi
+
+    # Older installs put a copy of the fonts under every theme's own folder.
+    # Drop those before writing the new manifest, or they leak forever.
+    prune_legacy_assets "$themes_dir"
+
     while IFS= read -r css; do
         name="$(basename "$css")"
         install_css "$themes_dir" "$css"
         entries="$entries$name"$'\n'
-
-        asset="$(asset_dir_for "$css")"
-        [ -n "$asset" ] || continue
-        case " $seen_assets " in *" $asset "*) continue ;; esac
-        seen_assets="$seen_assets $asset"
-        install_fonts "$themes_dir" "$asset"
-        entries="$entries$asset"$'\n'
     done < <(theme_css_files)
+
+    # One shared folder for every theme, not one per theme.
+    install_fonts "$themes_dir" "$FONTS_DIR"
+    entries="$entries$FONTS_DIR"$'\n'
 
     if [ "$DRY_RUN" -eq 0 ]; then
         printf '%s' "$entries" > "$themes_dir/$MANIFEST"
@@ -257,7 +325,7 @@ function main() {
 
     if [ "$ACTION" = "list" ]; then
         while IFS= read -r css; do
-            printf '%-28s -> asset dir: %s\n' "$(basename "$css")" "$(asset_dir_for "$css")"
+            printf '%-28s -> fonts: %s/\n' "$(basename "$css")" "$(fonts_dir_for "$css")"
         done < <(theme_css_files)
         return 0
     fi

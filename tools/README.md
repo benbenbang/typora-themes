@@ -40,7 +40,6 @@ Add `palettes/<theme>.json`, then a `themes/<theme>.py` exposing:
 | `NAME`, `PALETTE_URL`, `ACCENT` | shown in the generated file header                   |
 | `PALETTE_FILE`                  | filename under `palettes/`                           |
 | `OUT_DIR`                       | repo folder the CSS is written to                    |
-| `ASSET_DIR`                     | font folder name inside Typora's themes dir          |
 | `variants()`                    | yields `{id, name, dark, colors}` per variant        |
 | `variables(variant)`            | maps palette roles onto the template's CSS variables |
 

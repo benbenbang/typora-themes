@@ -15,8 +15,8 @@ carries the accented brand name.
 ## Install
 
 Typora resolves `url()` relative to the theme file, and only lists `.css` files at the
-root of the themes folder. So the CSS goes at the root and any fonts go in a
-`rose-pine/` folder beside it — the same layout the stock `gothic` theme uses.
+root of the themes folder. So the CSS goes at the root, and the fonts go in a shared
+`theme-fonts/` folder beside it.
 
 Open `Preferences → Appearance → Open Theme Folder`, then:
 
@@ -36,9 +36,11 @@ If Fira Code (or a Nerd Font build) is **installed on your system**, it is picke
 `local()` and there is nothing else to do. Otherwise, to embed it for this theme:
 
 ```sh
-mkdir -p "$THEMES/rose-pine/fonts"
-cp firacode-fonts/*.woff "$THEMES/rose-pine/fonts/"
+mkdir -p "$THEMES/theme-fonts"
+cp firacode-fonts/FiraCode-{Regular,Bold,Light,Medium,SemiBold}.woff "$THEMES/theme-fonts/"
 ```
+
+That folder is shared by every theme in this repo, so it only needs doing once.
 
 Skip that step and Typora will simply log two missing `.woff` requests and render with
 the fallback face.
@@ -80,6 +82,9 @@ is darker. Nothing in the mapping may assume "surface is darker".
   `muted` never clears 3:1 against any background on Moon (2.79:1) or Dawn (2.87:1).
   `subtle` is the next step up the same ramp and reaches 4.2–5.1:1 on the code surface.
   Comments stay italic, so they remain distinct from punctuation.
+- **Inline `code` is warm.** The dark variants colour the glyphs `gold` (8.8-10.1:1).
+  Dawn cannot: gold text reaches only 2.16:1 on the code surface, so the chip is tinted
+  gold instead and the text stays normal (6.12:1).
 - **`==highlight==` is tinted per variant.** Dawn's `gold` is a mid-tone that no palette
   color clears 4.5:1 against, so it is blended toward `base` (α=0.5) until it does. The
   dark variants keep `gold` at full strength.

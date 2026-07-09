@@ -12,8 +12,8 @@ Typora themes for all four [Catppuccin](https://catppuccin.com/palette) flavors,
 ## Install
 
 Typora resolves `url()` relative to the theme file, and only lists `.css` files at the
-root of the themes folder. So the CSS goes at the root and any fonts go in a
-`catppuccin/` folder beside it — the same layout the stock `gothic` theme uses.
+root of the themes folder. So the CSS goes at the root, and the fonts go in a shared
+`theme-fonts/` folder beside it.
 
 Open `Preferences → Appearance → Open Theme Folder`, then:
 
@@ -27,16 +27,18 @@ Restart Typora; the flavors appear as four entries in the Themes menu.
 ### Fonts
 
 The themes ask for Fira Code and fall back to the platform monospace face. Nothing is
-bundled — no font is committed under `catppuccin/`.
+bundled — no font is committed alongside the CSS.
 
 If Fira Code (or a Nerd Font build) is **installed on your system**, it is picked up via
 `local()` and there is nothing else to do. Otherwise, to embed it for this theme, copy
 the woff files in yourself:
 
 ```sh
-mkdir -p "$THEMES/catppuccin/fonts"
-cp firacode-fonts/*.woff "$THEMES/catppuccin/fonts/"
+mkdir -p "$THEMES/theme-fonts"
+cp firacode-fonts/FiraCode-{Regular,Bold,Light,Medium,SemiBold}.woff "$THEMES/theme-fonts/"
 ```
+
+That folder is shared by every theme in this repo, so it only needs doing once.
 
 Skip that step and Typora will simply log two missing `.woff` requests and render with
 the fallback face.
@@ -63,6 +65,10 @@ it meets text:
 - **Code sits on `mantle`, not `surface0`.** Comments (`overlay2`) reach 5.1–6.2:1 on
   the dark flavors and 3.25:1 on Latte. On `surface0` they would fall to 1.7:1. A 1px
   `surface0` border keeps the block distinct from the page instead of relying on fill.
+- **Inline `code` is warm.** The dark flavors colour the glyphs `peach`
+  (6.5-9.9:1). Latte cannot: peach text reaches only 2.45:1 on the code surface, and
+  darkening it to pass turns it muddy. There the chip is tinted peach instead and the
+  text stays normal (5.49:1).
 - **`==highlight==` is tinted per flavor.** Latte's yellow is a mid-tone mustard that no
   palette color clears 4.5:1 against, so it's blended toward `base` (α=0.5) until it
   does. The dark flavors keep yellow at full strength.

@@ -29,8 +29,8 @@ the theme's asset folder beside them — each palette README has the exact comma
 
 The themes ask for **Fira Code** and fall back to the platform monospace face. If you
 have Fira Code (or a Nerd Font build) installed, it is picked up via `local()`.
-`sync.sh` also copies this repo's `firacode-fonts/` into each installed theme's `fonts/`
-folder, so the themes render the same on a machine without it.
+`sync.sh` also copies this repo's `firacode-fonts/` once into a shared
+`<themes>/theme-fonts/` folder, so the themes render the same on a machine without it.
 
 ## Building
 
