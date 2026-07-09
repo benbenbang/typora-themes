@@ -59,10 +59,10 @@ def render(spec, template, root):
 
         substitutions = {
             "{ROOT_VARS}": "\n".join(f"    {k}: {v};" for k, v in css_vars.items()),
-            "{THEME_NAME}": spec.NAME,
-            "{VARIANT_NAME}": variant["name"],
+            "{TITLE}": variant.get("title") or f"{spec.NAME} {variant['name']}",
             "{PALETTE_URL}": spec.PALETTE_URL,
-            "{ACCENT_NAME}": spec.ACCENT.capitalize(),
+            # ACCENT may be a role path ("syn.fun"); specs can supply a nicer label.
+            "{ACCENT_NAME}": getattr(spec, "ACCENT_LABEL", spec.ACCENT.capitalize()),
             "{ASSET_DIR}": spec.ASSET_DIR,
         }
         css = template
