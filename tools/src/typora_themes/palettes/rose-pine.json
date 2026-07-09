@@ -1,0 +1,431 @@
+{
+  "source": "rose-pine/rose-pine-palette @ 92af52b (source/index.ts; hex authoritative, rgb derived)",
+  "variants": {
+    "dawn": {
+      "colors": {
+        "base": {
+          "hex": "#faf4ed",
+          "order": 0,
+          "rgb": {
+            "b": 237,
+            "g": 244,
+            "r": 250
+          }
+        },
+        "foam": {
+          "hex": "#56949f",
+          "order": 10,
+          "rgb": {
+            "b": 159,
+            "g": 148,
+            "r": 86
+          }
+        },
+        "gold": {
+          "hex": "#ea9d34",
+          "order": 7,
+          "rgb": {
+            "b": 52,
+            "g": 157,
+            "r": 234
+          }
+        },
+        "highlightHigh": {
+          "hex": "#cecacd",
+          "order": 14,
+          "rgb": {
+            "b": 205,
+            "g": 202,
+            "r": 206
+          }
+        },
+        "highlightLow": {
+          "hex": "#f4ede8",
+          "order": 12,
+          "rgb": {
+            "b": 232,
+            "g": 237,
+            "r": 244
+          }
+        },
+        "highlightMed": {
+          "hex": "#dfdad9",
+          "order": 13,
+          "rgb": {
+            "b": 217,
+            "g": 218,
+            "r": 223
+          }
+        },
+        "iris": {
+          "hex": "#907aa9",
+          "order": 11,
+          "rgb": {
+            "b": 169,
+            "g": 122,
+            "r": 144
+          }
+        },
+        "love": {
+          "hex": "#b4637a",
+          "order": 6,
+          "rgb": {
+            "b": 122,
+            "g": 99,
+            "r": 180
+          }
+        },
+        "muted": {
+          "hex": "#9893a5",
+          "order": 3,
+          "rgb": {
+            "b": 165,
+            "g": 147,
+            "r": 152
+          }
+        },
+        "overlay": {
+          "hex": "#f2e9e1",
+          "order": 2,
+          "rgb": {
+            "b": 225,
+            "g": 233,
+            "r": 242
+          }
+        },
+        "pine": {
+          "hex": "#286983",
+          "order": 9,
+          "rgb": {
+            "b": 131,
+            "g": 105,
+            "r": 40
+          }
+        },
+        "rose": {
+          "hex": "#d7827e",
+          "order": 8,
+          "rgb": {
+            "b": 126,
+            "g": 130,
+            "r": 215
+          }
+        },
+        "subtle": {
+          "hex": "#797593",
+          "order": 4,
+          "rgb": {
+            "b": 147,
+            "g": 117,
+            "r": 121
+          }
+        },
+        "surface": {
+          "hex": "#fffaf3",
+          "order": 1,
+          "rgb": {
+            "b": 243,
+            "g": 250,
+            "r": 255
+          }
+        },
+        "text": {
+          "hex": "#575279",
+          "order": 5,
+          "rgb": {
+            "b": 121,
+            "g": 82,
+            "r": 87
+          }
+        }
+      },
+      "dark": false,
+      "id": "rose-pine-dawn",
+      "name": "Ros\u00e9 Pine Dawn"
+    },
+    "main": {
+      "colors": {
+        "base": {
+          "hex": "#191724",
+          "order": 0,
+          "rgb": {
+            "b": 36,
+            "g": 23,
+            "r": 25
+          }
+        },
+        "foam": {
+          "hex": "#9ccfd8",
+          "order": 10,
+          "rgb": {
+            "b": 216,
+            "g": 207,
+            "r": 156
+          }
+        },
+        "gold": {
+          "hex": "#f6c177",
+          "order": 7,
+          "rgb": {
+            "b": 119,
+            "g": 193,
+            "r": 246
+          }
+        },
+        "highlightHigh": {
+          "hex": "#524f67",
+          "order": 14,
+          "rgb": {
+            "b": 103,
+            "g": 79,
+            "r": 82
+          }
+        },
+        "highlightLow": {
+          "hex": "#21202e",
+          "order": 12,
+          "rgb": {
+            "b": 46,
+            "g": 32,
+            "r": 33
+          }
+        },
+        "highlightMed": {
+          "hex": "#403d52",
+          "order": 13,
+          "rgb": {
+            "b": 82,
+            "g": 61,
+            "r": 64
+          }
+        },
+        "iris": {
+          "hex": "#c4a7e7",
+          "order": 11,
+          "rgb": {
+            "b": 231,
+            "g": 167,
+            "r": 196
+          }
+        },
+        "love": {
+          "hex": "#eb6f92",
+          "order": 6,
+          "rgb": {
+            "b": 146,
+            "g": 111,
+            "r": 235
+          }
+        },
+        "muted": {
+          "hex": "#6e6a86",
+          "order": 3,
+          "rgb": {
+            "b": 134,
+            "g": 106,
+            "r": 110
+          }
+        },
+        "overlay": {
+          "hex": "#26233a",
+          "order": 2,
+          "rgb": {
+            "b": 58,
+            "g": 35,
+            "r": 38
+          }
+        },
+        "pine": {
+          "hex": "#31748f",
+          "order": 9,
+          "rgb": {
+            "b": 143,
+            "g": 116,
+            "r": 49
+          }
+        },
+        "rose": {
+          "hex": "#ebbcba",
+          "order": 8,
+          "rgb": {
+            "b": 186,
+            "g": 188,
+            "r": 235
+          }
+        },
+        "subtle": {
+          "hex": "#908caa",
+          "order": 4,
+          "rgb": {
+            "b": 170,
+            "g": 140,
+            "r": 144
+          }
+        },
+        "surface": {
+          "hex": "#1f1d2e",
+          "order": 1,
+          "rgb": {
+            "b": 46,
+            "g": 29,
+            "r": 31
+          }
+        },
+        "text": {
+          "hex": "#e0def4",
+          "order": 5,
+          "rgb": {
+            "b": 244,
+            "g": 222,
+            "r": 224
+          }
+        }
+      },
+      "dark": true,
+      "id": "rose-pine",
+      "name": "Ros\u00e9 Pine"
+    },
+    "moon": {
+      "colors": {
+        "base": {
+          "hex": "#232136",
+          "order": 0,
+          "rgb": {
+            "b": 54,
+            "g": 33,
+            "r": 35
+          }
+        },
+        "foam": {
+          "hex": "#9ccfd8",
+          "order": 10,
+          "rgb": {
+            "b": 216,
+            "g": 207,
+            "r": 156
+          }
+        },
+        "gold": {
+          "hex": "#f6c177",
+          "order": 7,
+          "rgb": {
+            "b": 119,
+            "g": 193,
+            "r": 246
+          }
+        },
+        "highlightHigh": {
+          "hex": "#56526e",
+          "order": 14,
+          "rgb": {
+            "b": 110,
+            "g": 82,
+            "r": 86
+          }
+        },
+        "highlightLow": {
+          "hex": "#2a283e",
+          "order": 12,
+          "rgb": {
+            "b": 62,
+            "g": 40,
+            "r": 42
+          }
+        },
+        "highlightMed": {
+          "hex": "#44415a",
+          "order": 13,
+          "rgb": {
+            "b": 90,
+            "g": 65,
+            "r": 68
+          }
+        },
+        "iris": {
+          "hex": "#c4a7e7",
+          "order": 11,
+          "rgb": {
+            "b": 231,
+            "g": 167,
+            "r": 196
+          }
+        },
+        "love": {
+          "hex": "#eb6f92",
+          "order": 6,
+          "rgb": {
+            "b": 146,
+            "g": 111,
+            "r": 235
+          }
+        },
+        "muted": {
+          "hex": "#6e6a86",
+          "order": 3,
+          "rgb": {
+            "b": 134,
+            "g": 106,
+            "r": 110
+          }
+        },
+        "overlay": {
+          "hex": "#393552",
+          "order": 2,
+          "rgb": {
+            "b": 82,
+            "g": 53,
+            "r": 57
+          }
+        },
+        "pine": {
+          "hex": "#3e8fb0",
+          "order": 9,
+          "rgb": {
+            "b": 176,
+            "g": 143,
+            "r": 62
+          }
+        },
+        "rose": {
+          "hex": "#ea9a97",
+          "order": 8,
+          "rgb": {
+            "b": 151,
+            "g": 154,
+            "r": 234
+          }
+        },
+        "subtle": {
+          "hex": "#908caa",
+          "order": 4,
+          "rgb": {
+            "b": 170,
+            "g": 140,
+            "r": 144
+          }
+        },
+        "surface": {
+          "hex": "#2a273f",
+          "order": 1,
+          "rgb": {
+            "b": 63,
+            "g": 39,
+            "r": 42
+          }
+        },
+        "text": {
+          "hex": "#e0def4",
+          "order": 5,
+          "rgb": {
+            "b": 244,
+            "g": 222,
+            "r": 224
+          }
+        }
+      },
+      "dark": true,
+      "id": "rose-pine-moon",
+      "name": "Ros\u00e9 Pine Moon"
+    }
+  }
+}
