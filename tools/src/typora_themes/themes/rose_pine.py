@@ -42,6 +42,7 @@ def variants():
             "key": key,
             "id": v["id"],
             "name": v["name"],
+            "title": v["name"],
             "dark": v["dark"],
             "colors": {
                 n: c["hex"]

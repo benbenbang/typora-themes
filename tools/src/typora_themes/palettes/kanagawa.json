@@ -1,0 +1,242 @@
+{
+  "notes": [
+    "syn.variable is \"none\" upstream (inherit default fg); resolved to ui.fg here.",
+    "ui.pmenu.fg_sel is \"none\" upstream; dropped (unused).",
+    "The ui bg ramp is NOT monotonic: dragon bg_m1 is lighter than bg, lotus bg_p1 is darker than bg.",
+    "term[] (18 ansi colors) omitted; unused by the Typora themes."
+  ],
+  "source": "rebelot/kanagawa.nvim @ bb85e4b (lua/kanagawa/{colors,themes}.lua, parsed statically)",
+  "variants": {
+    "dragon": {
+      "colors": {
+        "diag": {
+          "error": "#e82424",
+          "hint": "#6a9589",
+          "info": "#658594",
+          "ok": "#98bb6c",
+          "warning": "#ff9e3b"
+        },
+        "diff": {
+          "add": "#2b3328",
+          "change": "#252535",
+          "delete": "#43242b",
+          "text": "#49443c"
+        },
+        "syn": {
+          "comment": "#737c73",
+          "constant": "#b6927b",
+          "deprecated": "#717c7c",
+          "fun": "#8ba4b0",
+          "identifier": "#c4b28a",
+          "keyword": "#8992a7",
+          "number": "#a292a3",
+          "operator": "#c4746e",
+          "parameter": "#a6a69c",
+          "preproc": "#c4746e",
+          "punct": "#9e9b93",
+          "regex": "#c4746e",
+          "special1": "#949fb5",
+          "special2": "#c4746e",
+          "special3": "#c4746e",
+          "statement": "#8992a7",
+          "string": "#8a9a7b",
+          "type": "#8ea4a2",
+          "variable": "#c5c9c5"
+        },
+        "ui": {
+          "bg": "#181616",
+          "bg_dim": "#12120f",
+          "bg_gutter": "#282727",
+          "bg_m1": "#1d1c19",
+          "bg_m2": "#12120f",
+          "bg_m3": "#0d0c0c",
+          "bg_p1": "#282727",
+          "bg_p2": "#393836",
+          "bg_search": "#2d4f67",
+          "bg_visual": "#223249",
+          "fg": "#c5c9c5",
+          "fg_dim": "#c8c093",
+          "fg_reverse": "#223249",
+          "float": {
+            "bg": "#0d0c0c",
+            "bg_border": "#0d0c0c",
+            "fg": "#c8c093",
+            "fg_border": "#54546d"
+          },
+          "nontext": "#625e5a",
+          "pmenu": {
+            "bg": "#223249",
+            "bg_sbar": "#223249",
+            "bg_sel": "#2d4f67",
+            "bg_thumb": "#2d4f67",
+            "fg": "#dcd7ba"
+          },
+          "special": "#7a8382",
+          "whitespace": "#625e5a"
+        },
+        "vcs": {
+          "added": "#76946a",
+          "changed": "#dca561",
+          "removed": "#c34043"
+        }
+      },
+      "dark": true,
+      "id": "kanagawa-dragon",
+      "name": "Kanagawa Dragon"
+    },
+    "lotus": {
+      "colors": {
+        "diag": {
+          "error": "#e82424",
+          "hint": "#5e857a",
+          "info": "#5a7785",
+          "ok": "#6f894e",
+          "warning": "#e98a00"
+        },
+        "diff": {
+          "add": "#b7d0ae",
+          "change": "#d7e3d8",
+          "delete": "#d9a594",
+          "text": "#f9d791"
+        },
+        "syn": {
+          "comment": "#8a8980",
+          "constant": "#cc6d00",
+          "deprecated": "#8a8980",
+          "fun": "#4d699b",
+          "identifier": "#77713f",
+          "keyword": "#624c83",
+          "number": "#b35b79",
+          "operator": "#836f4a",
+          "parameter": "#5d57a3",
+          "preproc": "#c84053",
+          "punct": "#4e8ca2",
+          "regex": "#836f4a",
+          "special1": "#6693bf",
+          "special2": "#c84053",
+          "special3": "#c84053",
+          "statement": "#624c83",
+          "string": "#6f894e",
+          "type": "#597b75",
+          "variable": "#545464"
+        },
+        "ui": {
+          "bg": "#f2ecbc",
+          "bg_dim": "#dcd5ac",
+          "bg_gutter": "#e7dba0",
+          "bg_m1": "#e5ddb0",
+          "bg_m2": "#dcd5ac",
+          "bg_m3": "#d5cea3",
+          "bg_p1": "#e7dba0",
+          "bg_p2": "#e4d794",
+          "bg_search": "#b5cbd2",
+          "bg_visual": "#c9cbd1",
+          "fg": "#545464",
+          "fg_dim": "#43436c",
+          "fg_reverse": "#dcd7ba",
+          "float": {
+            "bg": "#d5cea3",
+            "bg_border": "#d5cea3",
+            "fg": "#43436c",
+            "fg_border": "#716e61"
+          },
+          "nontext": "#a09cac",
+          "pmenu": {
+            "bg": "#c7d7e0",
+            "bg_sbar": "#c7d7e0",
+            "bg_sel": "#9fb5c9",
+            "bg_thumb": "#b5cbd2",
+            "fg": "#43436c"
+          },
+          "special": "#766b90",
+          "whitespace": "#a09cac"
+        },
+        "vcs": {
+          "added": "#6e915f",
+          "changed": "#de9800",
+          "removed": "#d7474b"
+        }
+      },
+      "dark": false,
+      "id": "kanagawa-lotus",
+      "name": "Kanagawa Lotus"
+    },
+    "wave": {
+      "colors": {
+        "diag": {
+          "error": "#e82424",
+          "hint": "#6a9589",
+          "info": "#658594",
+          "ok": "#98bb6c",
+          "warning": "#ff9e3b"
+        },
+        "diff": {
+          "add": "#2b3328",
+          "change": "#252535",
+          "delete": "#43242b",
+          "text": "#49443c"
+        },
+        "syn": {
+          "comment": "#727169",
+          "constant": "#ffa066",
+          "deprecated": "#717c7c",
+          "fun": "#7e9cd8",
+          "identifier": "#e6c384",
+          "keyword": "#957fb8",
+          "number": "#d27e99",
+          "operator": "#c0a36e",
+          "parameter": "#b8b4d0",
+          "preproc": "#e46876",
+          "punct": "#9cabca",
+          "regex": "#c0a36e",
+          "special1": "#7fb4ca",
+          "special2": "#e46876",
+          "special3": "#ff5d62",
+          "statement": "#957fb8",
+          "string": "#98bb6c",
+          "type": "#7aa89f",
+          "variable": "#dcd7ba"
+        },
+        "ui": {
+          "bg": "#1f1f28",
+          "bg_dim": "#181820",
+          "bg_gutter": "#2a2a37",
+          "bg_m1": "#1a1a22",
+          "bg_m2": "#181820",
+          "bg_m3": "#16161d",
+          "bg_p1": "#2a2a37",
+          "bg_p2": "#363646",
+          "bg_search": "#2d4f67",
+          "bg_visual": "#223249",
+          "fg": "#dcd7ba",
+          "fg_dim": "#c8c093",
+          "fg_reverse": "#223249",
+          "float": {
+            "bg": "#16161d",
+            "bg_border": "#16161d",
+            "fg": "#c8c093",
+            "fg_border": "#54546d"
+          },
+          "nontext": "#54546d",
+          "pmenu": {
+            "bg": "#223249",
+            "bg_sbar": "#223249",
+            "bg_sel": "#2d4f67",
+            "bg_thumb": "#2d4f67",
+            "fg": "#dcd7ba"
+          },
+          "special": "#938aa9",
+          "whitespace": "#54546d"
+        },
+        "vcs": {
+          "added": "#76946a",
+          "changed": "#dca561",
+          "removed": "#c34043"
+        }
+      },
+      "dark": true,
+      "id": "kanagawa-wave",
+      "name": "Kanagawa Wave"
+    }
+  }
+}

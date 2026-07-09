@@ -9,7 +9,7 @@ Generates the Typora themes in this repo from upstream color palettes. The gener
 cd tools
 uv sync
 uv run build-themes              # all themes
-uv run build-themes rose_pine    # just one
+uv run build-themes kanagawa     # just one
 ```
 
 Output is written into the repo, next to each theme's README. The repo root is found by
@@ -49,6 +49,10 @@ Register it in `themes.NAMES`. The build fails if `variables()` omits any variab
 
 ## Notes
 
-Both palettes needed care beyond copying hex values — comment contrast and `==highlight==`
-legibility differ per variant, and Rosé Pine's upstream `palette.json` is stale. Each
-theme's README documents what was changed and why.
+Every palette needed care beyond copying hex values — comment contrast and `==highlight==`
+legibility differ per variant, Rosé Pine's upstream `palette.json` is stale, and
+Kanagawa's background ramp is not monotonic. Each theme's README documents what was
+changed and why.
+
+Kanagawa has no machine-readable palette; its JSON is parsed statically from the
+Neovim plugin's Lua (never executed).
