@@ -3,10 +3,10 @@
 Typora themes for all three [Rosé Pine](https://rosepinetheme.com/palette) variants,
 accented with **Iris**.
 
-| Theme | Variant | |
-| :--- | :--- | :--- |
-| `rose-pine.css` | Rosé Pine | dark |
-| `rose-pine-moon.css` | Rosé Pine Moon | dark |
+| Theme                | Variant        |       |
+| :------------------- | :------------- | :---- |
+| `rose-pine.css`      | Rosé Pine      | dark  |
+| `rose-pine-moon.css` | Rosé Pine Moon | dark  |
 | `rose-pine-dawn.css` | Rosé Pine Dawn | light |
 
 File names are the upstream variant ids, so they stay ASCII even though this folder
@@ -73,7 +73,7 @@ That file is stale and internally inconsistent; the vendored copy uses
 ### Contrast notes
 
 Unlike Catppuccin, the background ramp is not monotonic: on the dark variants `surface`
-and `overlay` are *lighter* than `base`, while on Dawn `surface` is lighter but `overlay`
+and `overlay` are _lighter_ than `base`, while on Dawn `surface` is lighter but `overlay`
 is darker. Nothing in the mapping may assume "surface is darker".
 
 - **Comments use `subtle`, not `muted`.** Upstream assigns comments to `muted`, but

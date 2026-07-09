@@ -22,6 +22,8 @@ repos:
           - --unsafe
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        args:
+          - --markdown-linebreak-ext=md
       - id: check-added-large-files
         args:
           - --maxkb=1024

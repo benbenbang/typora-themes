@@ -3,11 +3,11 @@
 Ten Typora themes across three palettes, generated from upstream color definitions
 rather than hand-written.
 
-| Palette | Variants | Accent |
-| :--- | :--- | :--- |
-| [Catppuccin](catppuccin/) | Latte · Frappé · Macchiato · Mocha | Mauve |
-| [Rosé Pine](rosé-pine/) | Rosé Pine · Moon · Dawn | Iris |
-| [Kanagawa](kanagawa/) | Wave · Dragon · Lotus | Blue (`syn.fun`) |
+| Palette                   | Variants                           | Accent           |
+| :------------------------ | :--------------------------------- | :--------------- |
+| [Catppuccin](catppuccin/) | Latte · Frappé · Macchiato · Mocha | Mauve            |
+| [Rosé Pine](rosé-pine/)   | Rosé Pine · Moon · Dawn            | Iris             |
+| [Kanagawa](kanagawa/)     | Wave · Dragon · Lotus              | Blue (`syn.fun`) |
 
 Each palette's README documents its role mapping and the contrast decisions behind it.
 
