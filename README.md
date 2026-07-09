@@ -32,6 +32,30 @@ have Fira Code (or a Nerd Font build) installed, it is picked up via `local()`.
 `sync.sh` also copies this repo's `firacode-fonts/` once into a shared
 `<themes>/theme-fonts/` folder, so the themes render the same on a machine without it.
 
+#### Using your own fonts
+
+Two variables control everything, and you can retarget them **without editing any
+generated file**. Typora loads `base.user.css` (all themes) and `{theme}.user.css` (one
+theme) _after_ the theme, so a `:root` block there wins.
+
+Create `base.user.css` in your themes folder:
+
+```css
+:root {
+  --font-text: "Inter", system-ui, sans-serif; /* prose */
+  --font-mono: "JetBrains Mono", ui-monospace, monospace; /* code */
+}
+```
+
+| Variable | Applies to |
+| :--- | :--- |
+| `--font-text` | body prose, headings, tables, everything outside code |
+| `--font-mono` | inline `code`, fenced blocks, source mode, the YAML block, diagram labels |
+
+Both default to the bundled Fira Code stack, so prose is monospaced out of the box.
+Set only `--font-text` if you want proportional prose with monospaced code. Restart
+Typora after adding the file.
+
 ## Building
 
 The `.css` files are committed, so you only need this to change a theme.

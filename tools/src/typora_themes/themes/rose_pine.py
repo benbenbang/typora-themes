@@ -87,8 +87,6 @@ def variables(v):
     out.update(
         {
             "--accent-color": accent,
-            "--font-mono": '"Fira Code", "FiraCode Nerd Font", "FuraCode Nerd Font", ui-monospace, '
-            '"SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace',
             # backgrounds
             "--bg-color1": c["base"],
             "--bg-color2": c["surface"],

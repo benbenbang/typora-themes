@@ -66,10 +66,28 @@ html {
 }
 
 body {
-    font-family: var(--font-mono);
+    font-family: var(--font-text);
     color: var(--text-color1);
     background: var(--bg-color1);
     line-height: 1.6;
+}
+
+/* Fonts are variables. To use different ones without editing this file, drop a
+ * base.user.css (all themes) or <theme>.user.css (one theme) into Typora's themes
+ * folder -- both load after the theme -- and override:
+ *
+ *   :root {
+ *       --font-text: "Inter", system-ui, sans-serif;
+ *       --font-mono: "JetBrains Mono", ui-monospace, monospace;
+ *   }
+ */
+:not(pre) > code,
+.md-fences,
+pre.md-meta-block,
+.CodeMirror,
+.CodeMirror pre,
+#typora-source .CodeMirror {
+    font-family: var(--font-mono);
 }
 
 /* text selection background color */

@@ -18,6 +18,14 @@ PACKAGE = "typora_themes"
 # per theme. Named distinctly so it cannot collide with a theme's own asset dir.
 FONTS_DIR = "theme-fonts"
 
+# Default font stacks. Every theme gets these; a spec may override either.
+# Users retarget them from base.user.css without touching the generated CSS.
+_FIRA = (
+    '"Fira Code", "FiraCode Nerd Font", "FuraCode Nerd Font", ui-monospace, '
+    '"SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace'
+)
+COMMON_VARS = {"--font-text": _FIRA, "--font-mono": _FIRA}
+
 
 def repo_root(start=None):
     """Nearest ancestor containing .git, searched from `start` then from here."""
@@ -52,7 +60,7 @@ def render(spec, template, root):
     required = set(re.findall(r"var\((--[\w-]+)", template))
 
     for variant in spec.variants():
-        css_vars = spec.variables(variant)
+        css_vars = {**COMMON_VARS, **spec.variables(variant)}
 
         missing = required - set(css_vars)
         if missing:
