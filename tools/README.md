@@ -43,7 +43,8 @@ Add `palettes/<theme>.json`, then a `themes/<theme>.py` exposing:
 | `variants()`                    | yields `{id, name, dark, colors}` per variant        |
 | `variables(variant)`            | maps palette roles onto the template's CSS variables |
 
-Register it in `themes.NAMES`. The build fails if `variables()` omits any variable
+Shared defaults like `--font-text` and `--font-mono` come from `COMMON_VARS` in
+`build.py`; a spec may override either. Register the theme in `themes.NAMES`. The build fails if `variables()` omits any variable
 `template.css` references, so a template edit cannot silently produce a broken theme.
 
 ## Notes
