@@ -46,12 +46,14 @@ the fallback face.
 The four themes are generated from the upstream palette rather than hand-written:
 
 ```sh
-python3 catppuccin/tools/generate.py
+cd tools && uv run build-themes catppuccin
 ```
 
-`tools/palette.json` is vendored from [catppuccin/palette](https://github.com/catppuccin/palette)
-and pinned. To follow an upstream change, replace it, bump `PALETTE_SHA`, and re-run.
-Edit `tools/template.css` — never the generated `catppuccin-*.css`.
+`tools/src/typora_themes/palettes/catppuccin.json` is vendored from
+[catppuccin/palette](https://github.com/catppuccin/palette) and pinned. To follow an
+upstream change, replace it and re-run. The role mapping lives in
+`tools/src/typora_themes/themes/catppuccin.py`; the shared markup styling lives in
+`tools/src/typora_themes/template.css`. Never edit the generated `catppuccin-*.css`.
 
 ### Contrast notes
 
