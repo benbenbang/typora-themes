@@ -37,24 +37,24 @@ than hardcoded, which is why the accented `rosé-pine/` repo folder installs as
 
 ### Behavior
 
-| | |
-| :--- | :--- |
-| Re-running | Idempotent. Refreshes files it installed, so a rebuilt theme is picked up. |
-| Tracking | What it installed is recorded in `<themes>/.typora-themes-manifest`. |
-| Foreign files | Left alone. A hand-written `github.css` is never touched. |
-| Name collisions | Skipped with a warning unless `--force`. |
-| `--uninstall` | Removes only what the manifest lists, then the manifest. |
-| Older installs | A previous symlinked install is replaced with real files. |
+|                 |                                                                            |
+| :-------------- | :------------------------------------------------------------------------- |
+| Re-running      | Idempotent. Refreshes files it installed, so a rebuilt theme is picked up. |
+| Tracking        | What it installed is recorded in `<themes>/.typora-themes-manifest`.       |
+| Foreign files   | Left alone. A hand-written `github.css` is never touched.                  |
+| Name collisions | Skipped with a warning unless `--force`.                                   |
+| `--uninstall`   | Removes only what the manifest lists, then the manifest.                   |
+| Older installs  | A previous symlinked install is replaced with real files.                  |
 
 ### Themes folder
 
 Detected per OS, overridable with `TYPORA_EXTENSION_PATH`:
 
-| OS | Path |
-| :--- | :--- |
-| macOS | `~/Library/Application Support/abnerworks.Typora/themes` |
-| Linux | `~/.config/Typora/themes` |
-| Windows | `%APPDATA%/Typora/themes` |
+| OS      | Path                                                     |
+| :------ | :------------------------------------------------------- |
+| macOS   | `~/Library/Application Support/abnerworks.Typora/themes` |
+| Linux   | `~/.config/Typora/themes`                                |
+| Windows | `%APPDATA%/Typora/themes`                                |
 
 ```sh
 TYPORA_EXTENSION_PATH=/tmp/themes ./scripts/sync.sh --dry-run

@@ -3,11 +3,11 @@
 Typora themes for all three [Kanagawa](https://github.com/rebelot/kanagawa.nvim) variants,
 accented with the signature blue (`syn.fun`).
 
-| Theme | Variant | |
-| :--- | :--- | :--- |
-| `kanagawa-wave.css` | Kanagawa Wave | dark |
-| `kanagawa-dragon.css` | Kanagawa Dragon | dark |
-| `kanagawa-lotus.css` | Kanagawa Lotus | light |
+| Theme                 | Variant         |       |
+| :-------------------- | :-------------- | :---- |
+| `kanagawa-wave.css`   | Kanagawa Wave   | dark  |
+| `kanagawa-dragon.css` | Kanagawa Dragon | dark  |
+| `kanagawa-lotus.css`  | Kanagawa Lotus  | light |
 
 ## Install
 
@@ -64,7 +64,7 @@ Two upstream details are normalised on the way in:
 ### Contrast notes
 
 **The background ramp is not monotonic.** Despite the `bg_m3 … bg … bg_p2` naming, on
-Dragon `bg_m1` is *lighter* than `bg`, and on Lotus `bg_p1` is *darker* than `bg`. Only
+Dragon `bg_m1` is _lighter_ than `bg`, and on Lotus `bg_p1` is _darker_ than `bg`. Only
 `bg_m3`, `bg_m2` and `bg_dim` are reliably darker than `bg` in all three variants, so
 every recessed surface (code, inputs, alternating table rows) is drawn from those. Any
 mapping that assumes "`_p` means lighter" will invert on one variant.

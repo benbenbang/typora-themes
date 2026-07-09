@@ -2,12 +2,12 @@
 
 Typora themes for all four [Catppuccin](https://catppuccin.com/palette) flavors, accented with **Mauve**.
 
-| Theme | Flavor | |
-| :--- | :--- | :--- |
-| `catppuccin-latte.css` | Latte | light |
-| `catppuccin-frappe.css` | Frappé | dark |
-| `catppuccin-macchiato.css` | Macchiato | dark |
-| `catppuccin-mocha.css` | Mocha | dark |
+| Theme                      | Flavor    |       |
+| :------------------------- | :-------- | :---- |
+| `catppuccin-latte.css`     | Latte     | light |
+| `catppuccin-frappe.css`    | Frappé    | dark  |
+| `catppuccin-macchiato.css` | Macchiato | dark  |
+| `catppuccin-mocha.css`     | Mocha     | dark  |
 
 ## Install
 
