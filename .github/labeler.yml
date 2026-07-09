@@ -1,0 +1,23 @@
+enhancement:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "tools/**/*"
+          - "scripts/**/*"
+
+theme:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.css"
+
+workflows:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**/*"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - "**/*.md"
+          - "docs/**/*.md"
+          - "docs/mkdocs.yml"
